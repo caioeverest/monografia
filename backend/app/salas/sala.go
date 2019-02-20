@@ -33,6 +33,13 @@ func TrazerTodasAsSalas() []Sala {
 	return output
 }
 
+func Existe(id string) bool {
+	if sala, _ := EncontrarSalaPorIdentificador(id); sala != nil {
+		return true
+	}
+	return false
+}
+
 func TrazerIdentificadoresDeTodasAsSalas() ([]string, error) {
 	identificadores, err := repository.RecuperarIdentificadores()
 	if err != nil {

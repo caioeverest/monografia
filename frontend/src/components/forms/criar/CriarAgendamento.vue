@@ -2,6 +2,16 @@
   <div>
     <b-modal ref="modal" id="criar" size="lg" title="Criar novo agendamento" hide-footer>
       <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+        <b-form-group id="inicio"
+                    label="Data e hora do inicio da aula:"
+                    label-for="inicioInput">
+            <date-picker v-model="form.inicio" :config="options" required/>
+        </b-form-group>
+        <b-form-group id="fim"
+                    label="Data e hora do fim da aula:"
+                    label-for="fimInput">
+            <date-picker v-model="form.fim" :config="options" required/>
+        </b-form-group>
         <b-form-row>
           <div class="col 2">
             <b-form-group id="professor"
@@ -27,16 +37,6 @@
             </b-form-group>
           </div>
         </b-form-row>
-        <b-form-group id="inicio"
-                    label="Data e hora do inicio da aula:"
-                    label-for="inicioInput">
-            <date-picker v-model="form.inicio" :config="options" required/>
-        </b-form-group>
-        <b-form-group id="fim"
-                    label="Data e hora do fim da aula:"
-                    label-for="fimInput">
-            <date-picker v-model="form.fim" :config="options" required/>
-        </b-form-group>
         <b-button type="submit" variant="primary">Criar!</b-button>
         <b-button type="reset" variant="danger">Limpar</b-button>
       </b-form>

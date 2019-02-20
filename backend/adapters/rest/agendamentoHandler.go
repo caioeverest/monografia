@@ -1,7 +1,9 @@
 package rest
 
 import (
+	"fmt"
 	"github.com/caioever/monografia/backend/app/agendamentos"
+	"github.com/caioever/monografia/backend/app/salas"
 	"github.com/caioever/monografia/backend/infra/helper"
 	"github.com/labstack/echo"
 	"net/http"
@@ -23,6 +25,17 @@ func (restBase *restBase) CriarNovoAgendamento(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError,
 			helper.ResponseBuilder(err.Error(),
 			http.StatusInternalServerError))
+	}
+	if salas.Existe(body.Sala) {
+		return c.JSON(http.StatusConflict,
+			helper.ResponseBuilder("Sala [" + body.Sala + "] não encontrada", http.StatusConflict))
+	}
+	if agendamentoId, existe := salas.SalasOcupadas(body.Inicio, body.Fim)[body.Sala]; existe {
+		agendamento, _ := agendamentos.RecuperaAgendamentoPeloIdSimplificado(agendamentoId)
+		mensagem := fmt.Sprintf("sala %s ocupada pelo pelo professor %s, no agendamento: %s", body.Sala,
+			agendamento.Professor, agendamento.Id)
+		return c.JSON(http.StatusConflict,
+			helper.ResponseBuilder(mensagem, http.StatusConflict))
 	}
 	if err := agendamentos.CriarNovoAgendamento(body); err != nil {
 		return c.JSON(http.StatusInternalServerError,

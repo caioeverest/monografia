@@ -28,10 +28,10 @@ func (repository *RepositorioDeAgendamentos) RetornarAgendamentoEntre(inicio, fi
 	query := make(map[string]interface{})
 
 	query["inicio"] = map[string]time.Time {
-		"$gte": fim,
+		"$lte": fim,
 	}
 	query["fim"] = map[string]time.Time {
-		"$lt": inicio,
+		"$gte": inicio,
 	}
 	query["status"] = map[string]map[string]string {
 		"$not": {
