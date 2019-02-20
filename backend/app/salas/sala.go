@@ -34,9 +34,9 @@ func TrazerTodasAsSalas() []Sala {
 
 func Existe(id string) bool {
 	if sala, _ := EncontrarSalaPorIdentificador(id); sala != nil {
-		return true
+		return false
 	}
-	return false
+	return true
 }
 
 func TrazerIdentificadoresDeTodasAsSalas() ([]string, error) {
