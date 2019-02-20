@@ -9,24 +9,23 @@ import (
 )
 
 type Sala struct {
-	Campus				string	`json:"campus"`
-	Bloco				string	`json:"bloco"`
-	Numero				string	`json:"numero"`
-	Identificador 		string	`json:"identificador"`
+	Campus        string `json:"campus"`
+	Bloco         string `json:"bloco"`
+	Numero        string `json:"numero"`
+	Identificador string `json:"identificador"`
 }
 
 var repository = repositorioDeSalas.Init()
-
 
 func TrazerTodasAsSalas() []Sala {
 	var output []Sala
 	dadosBanco := repository.TodasAsSalas()
 	for _, sala := range dadosBanco {
 		this := Sala{
-			Campus:			sala.Campus,
-			Bloco:			sala.Bloco,
-			Numero:			sala.Numero,
-			Identificador:	sala.Identificador,
+			Campus:        sala.Campus,
+			Bloco:         sala.Bloco,
+			Numero:        sala.Numero,
+			Identificador: sala.Identificador,
 		}
 		output = append(output, this)
 	}
@@ -48,26 +47,26 @@ func TrazerIdentificadoresDeTodasAsSalas() ([]string, error) {
 	return identificadores, nil
 }
 
-func EncontrarSalaPorIdentificador(identificador string) (Sala, error) {
+func EncontrarSalaPorIdentificador(identificador string) (*Sala, error) {
 	r, err := repository.EncontraPeloIdentificador(identificador)
 	if err != nil {
-		return Sala{}, err
+		return &Sala{}, err
 	}
 	out := Sala{
-		Campus: 		r.Campus,
-		Bloco: 			r.Bloco,
-		Numero: 		r.Numero,
-		Identificador: 	r.Identificador,
+		Campus:        r.Campus,
+		Bloco:         r.Bloco,
+		Numero:        r.Numero,
+		Identificador: r.Identificador,
 	}
-	return out, nil
+	return &out, nil
 }
 
 func CriarNovaSala(n *Sala) error {
 	sala := &repositorioDeSalas.SalaEntity{
-		Campus: 		n.Campus,
-		Bloco: 			n.Bloco,
-		Numero: 		n.Numero,
-		Identificador: 	n.Identificador,
+		Campus:        n.Campus,
+		Bloco:         n.Bloco,
+		Numero:        n.Numero,
+		Identificador: n.Identificador,
 	}
 	id := n.Identificador
 	sala.SetId(bson.ObjectId(id).Hex())
@@ -113,5 +112,3 @@ func SalasOcupadas(inicio, fim time.Time) map[string]string {
 func DeletaSala(id string) error {
 	return repository.Delete(id)
 }
-
-
