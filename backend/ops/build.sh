@@ -13,9 +13,9 @@ echo "                                      "
 echo "                                      "
 echo "                                      "
 
-echo "Buildando para repo caiobarcelos/monografia with tag backend-$0"
+echo "Buildando para repo caiobarcelos/monografia with tag backend-$1"
 
-IMAGEM="caiobarcelos/monografia:backend-$0"
+IMAGEM="caiobarcelos/monografia:backend-$1"
 
 docker build -t ${IMAGEM} .
 

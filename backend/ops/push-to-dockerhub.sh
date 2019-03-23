@@ -16,4 +16,4 @@ echo "                                                                          
 
 echo "Fazendo push da imagem"
 
-docker push ${0}
+docker push ${1}

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-version="v$0"
+version="v$1"
 
 
 echo " _______             __                                         ";
@@ -21,7 +21,7 @@ echo "Iniciando processo de releasing da versão $version"
 
 echo "Tudo certo? (S/n)"
 read resp
-if [[ resp eq n ]]; then
+if [[ resp = "n" ]]; then
     exit
 fi
 
