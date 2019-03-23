@@ -31,3 +31,6 @@ git commit -am "Fechando versão: $version"
 
 echo "Gerando nova tag"
 git tag -a ${version} -m "versao ${version}"
+git push
+
+sh build.sh ${version}
