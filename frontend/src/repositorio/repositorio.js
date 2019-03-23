@@ -1,8 +1,7 @@
 import axios from "axios";
 
 let backendHost = process.env.VUE_APP_BACK_HOST || "localhost";
-let backendPort = process.env.VUE_APP_BACK_PORT || "7000";
-let baseURL = `http://${backendHost}:${backendPort}`;
+let baseURL = `${backendHost}`;
 
 export default axios.create({
   baseURL,
