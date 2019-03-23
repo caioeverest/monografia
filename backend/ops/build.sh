@@ -1,27 +1,20 @@
 #!/usr/bin/env bash
 
-echo " _______             __  __        __ "
-echo "/       \           /  |/  |      /  |"
-echo "$$$$$$$  | __    __ $$/ $$ |  ____$$ |"
-echo "$$ |__$$ |/  |  /  |/  |$$ | /    $$ |"
-echo "$$    $$< $$ |  $$ |$$ |$$ |/$$$$$$$ |"
-echo "$$$$$$$  |$$ |  $$ |$$ |$$ |$$ |  $$ |"
-echo "$$ |__$$ |$$ \__$$ |$$ |$$ |$$ \__$$ |"
-echo "$$    $$/ $$    $$/ $$ |$$ |$$    $$ |"
-echo "$$$$$$$/   $$$$$$/  $$/ $$/  $$$$$$$/ "
-echo "                                      "
-echo "                                      "
-echo "                                      "
-
-echo "Buildando para repo caiobarcelos/monografia with tag backend-$1"
+version="v$1"
+echo "##########################################################################"
+echo "#                                                                        #"
+echo "# Buildando para repo caiobarcelos/monografia com tag backend-${version} #"
+echo "#                                                                        #"
+echo "##########################################################################"
 
 IMAGEM="caiobarcelos/monografia:backend-$1"
 
 docker build -t ${IMAGEM} .
 
-echo "Imagem gerada ${IMAGEM}"
-echo ""
-echo "Detalhes:"
-docker images ${IMAGEM}
+echo "##########################################################################"
+echo "#                                                                        #"
+echo "#                        Imagem gerada ${IMAGEM}                         #"
+echo "#                                                                        #"
+echo "##########################################################################"
 
-sh push-to-dockerhub.sh ${IMAGEM}
+sh ops/push-to-dockerhub.sh ${IMAGEM}

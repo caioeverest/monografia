@@ -1,23 +1,14 @@
 #!/usr/bin/env bash
 
+cd ../
+
 version="v$1"
 
-
-echo " _______             __                                         ";
-echo "/       \           /  |                                        ";
-echo "$$$$$$$  |  ______  $$ |  ______    ______    _______   ______  ";
-echo "$$ |__$$ | /      \ $$ | /      \  /      \  /       | /      \ ";
-echo "$$    $$< /$$$$$$  |$$ |/$$$$$$  | $$$$$$  |/$$$$$$$/ /$$$$$$  |";
-echo "$$$$$$$  |$$    $$ |$$ |$$    $$ | /    $$ |$$      \ $$    $$ |";
-echo "$$ |  $$ |$$$$$$$$/ $$ |$$$$$$$$/ /$$$$$$$ | $$$$$$  |$$$$$$$$/ ";
-echo "$$ |  $$ |$$       |$$ |$$       |$$    $$ |/     $$/ $$       |";
-echo "$$/   $$/  $$$$$$$/ $$/  $$$$$$$/  $$$$$$$/ $$$$$$$/   $$$$$$$/ ";
-echo "                                                                ";
-echo "                                                                ";
-echo "                                                                ";
-
-
-echo "Iniciando processo de releasing da versão $version"
+echo "####################################################################"
+echo "#                                                                  #"
+echo "#        Iniciando processo de releasing da versão $version        #"
+echo "#                                                                  #"
+echo "####################################################################"
 
 echo "Tudo certo? (S/n)"
 read resp
@@ -32,5 +23,3 @@ git commit -am "Fechando versão: $version"
 echo "Gerando nova tag"
 git tag -a ${version} -m "versao ${version}"
 git push
-
-sh build.sh ${version}
