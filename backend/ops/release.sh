@@ -30,4 +30,4 @@ git add .
 git commit -am "Fechando versão: $version"
 
 echo "Gerando nova tag"
-git tag -a ${version}
+git tag -a ${version} -m "versao ${version}"
