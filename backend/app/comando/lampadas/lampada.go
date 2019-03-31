@@ -1,7 +1,7 @@
 package lampadas
 
 type Lampada struct {
-	Ativo bool
+	Ativo bool	`json:"ativo"`
 }
 
 func MontaComandoParaLampada(ativo bool) *Lampada {

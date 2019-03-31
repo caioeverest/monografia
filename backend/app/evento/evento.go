@@ -40,7 +40,7 @@ func TrazerTodosOsEventos() (interface{}, error) {
 }
 
 func enviarComando(context *mqtt.Context, evento *Evento) error {
-	msg, err := json.Marshal(evento)
+	msg, err := json.Marshal(evento.Commmand)
 	if err != nil {
 		return err
 	}
