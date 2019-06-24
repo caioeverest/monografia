@@ -1,12 +1,13 @@
 package evento
 
 import (
+	"log"
+	"time"
+
 	"github.com/caioever/monografia/backend/adapters/mqtt"
 	"github.com/caioever/monografia/backend/app/agendamentos"
 	"github.com/caioever/monografia/backend/app/comando/lampadas"
 	"github.com/jasonlvhit/gocron"
-	"log"
-	"time"
 )
 
 //go mqttContext.Listen("orquestrador")
@@ -17,14 +18,14 @@ func IniciarPipeMonitoramento(context *mqtt.Context) {
 	gocron.Every(1).Minute().Do(monitorDeInicio, context)
 	gocron.Every(1).Minute().Do(monitorDeFechamento, context)
 
-	<- gocron.Start()
+	<-gocron.Start()
 }
 
 func monitorDeInicio(context *mqtt.Context) {
 	query := make(map[string]interface{})
 	param := make(map[string]time.Time)
 
-	param["$lt"] 	= time.Now()
+	param["$gte"] = time.Now()
 	//param["$gte"] 	= time.Now().Add(-time.Minute)
 	query["inicio"] = param
 	query["status"] = agendamentos.EM_ESPERA
@@ -52,7 +53,7 @@ func monitorDeFechamento(context *mqtt.Context) {
 	query := make(map[string]interface{})
 	param := make(map[string]time.Time)
 
-	param["$lt"] 	= time.Now()
+	param["$lt"] = time.Now()
 	//param["$gte"] 	= time.Now().Add(-time.Minute)
 	query["fim"] = param
 	query["status"] = agendamentos.INICIADO
